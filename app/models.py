@@ -27,7 +27,7 @@
                  book                       relationship                                  借阅书籍的属性
 """
 from . import db, login_manager, app
-from flask.ext.login import UserMixin
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys
 
@@ -37,7 +37,7 @@ if sys.version_info[0] == 3:
     enable_search = False
 else:
     enable_search = True
-    import flask.ext.whooshalchemy as whooshalchemy
+    import flask_whooshalchemy as whooshalchemy
 
 
 

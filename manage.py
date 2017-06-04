@@ -26,10 +26,10 @@
 import sys
 from app import app, db
 from app.models import Book, User
-from flask.ext.script import Manager, Shell
-from flask.ext.migrate import Migrate, MigrateCommand
-from flask.ext.admin import Admin
-from flask.ext.admin.contrib.sqla import ModelView
+from flask_script import Manager, Shell
+from flask_migrate import Migrate, MigrateCommand
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 
 """编码设置"""
