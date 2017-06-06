@@ -7,8 +7,7 @@
         木犀表单文件
 """
 from flask_wtf import Form
-from wtforms import IntegerField, StringField, SubmitField, PasswordField, \
-        BooleanField
+from wtforms import IntegerField, StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import Required, EqualTo
 
 
@@ -23,8 +22,7 @@ class SearchForm(Form):
 class BookForm(Form):
     """录入表单"""
     bookname = StringField('书名', validators=[Required()])
-    tag = StringField('类别(后台、设计、前端、互联网、其他)', \
-                      validators=[Required()])
+    tag = StringField('类别(后台、设计、前端、互联网、其他)', validators=[Required()])
     submit = SubmitField('录入')
 
 
