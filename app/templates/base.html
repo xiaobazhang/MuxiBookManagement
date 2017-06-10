@@ -20,16 +20,14 @@
   {% block style %}
   <!-- css style in html file -->
   {% endblock %}
-
-
 			<div class="header">
 
 				<div class="nav_image">
 					<img src="/static/image/logo.png">
 				</div>
 		   		<ul class="menu">
-					<li class="nav home"><a href="/">HOME</a></li>
-					<li class="nav search"><a href="javascript:void(0)" onclick="showBorder()">SEARCH</a></li>
+					<li class="nav home"><a href="/">首页</a></li>
+					<li class="nav search"><a href="javascript:void(0)" onclick="showBorder()">搜索</a></li>
 					<!--弹出框-->
 						<a href="javascript:void(0)" onclick="hideBorder()"><div class="close" id="close"></div></a>
 					<!--关闭 -->
@@ -41,10 +39,10 @@
 								<input type="text" class="ipt" placeholder="书名、关键词" name="search">
 								<input type="submit" class="search_logo" alt="search" value="">
 	    				</div>
-							<!--div class="choose">
+							<div class="choose">
 		    				<input type="radio" name="range" value="can" id="canBorrow"/><label for="canBorrow">可借</label>
-		    				<input type="radio" name="range" value="all" id="all"/><label for="range_all">全部</label>
-							</div-->
+								<!--input type="radio" name="range" value="all" id="all"/><label for="range_all">全部</label-->
+							</div>
 							<ul class="tags">
 								<li><a href="/search_results/?search=前端&range=all">前端</a></li>
 								<li><a href="/search_results/?search=后台&range=all">后台</a></li>
@@ -60,7 +58,7 @@
 					<li class="nav user"><a href="/user/{{ current_user.id }}">Hi!{{ current_user.username }}</a></li>
 					<li class="nav log"><a href="/logout">LOG OUT</a></li>
 				{% else %}
-					<li class="nav log"><a href="javascript:;" onclick="showBorderLog()">LOG ON</a></li>
+					<li class="nav log"><a href="javascript:;" onclick="showBorderLog()">登录</a></li>
 						<div id="content_log" class="light_content users">
 				{% block form_content %}
 
