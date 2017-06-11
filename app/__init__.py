@@ -12,6 +12,7 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "I hate flask!"
+app.config['CSRF_ENABLED'] = "True"
 # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///path/to/data.sqlite"  # 系统相应替换
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://///Users/suli/ClionProjects/MuxiBookManagement/data.sqlite"  # 系统相应替换
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True

@@ -4,16 +4,16 @@
     forms.py
     ~~~~~~~~
 
-        木犀表单文件
+        登录后台表单
 """
 from flask_wtf import Form
 from wtforms import IntegerField, StringField, SubmitField, PasswordField, BooleanField
-from wtforms.validators import Required, EqualTo
+from wtforms.validators import DataRequired, EqualTo
 
 
 class SearchForm(Form):
     """搜索表单🔍"""
-    search = StringField('完整书名or类别名', validators=[Required()])
+    search = StringField('完整书名or类别名', validators=[DataRequired()])
     status1 = BooleanField('可借')
     status2 = BooleanField('全部')
     submit = SubmitField('搜索')
@@ -21,16 +21,16 @@ class SearchForm(Form):
 
 class BookForm(Form):
     """录入表单"""
-    bookname = StringField('书名', validators=[Required()])
-    tag = StringField('类别(后台、设计、前端、互联网、其他)', validators=[Required()])
+    bookname = StringField('书名', validators=[DataRequired()])
+    tag = StringField('类别(后台、设计、前端、互联网、其他)', validators=[DataRequired()])
     submit = SubmitField('录入')
 
 
 class LoginForm(Form):
     """登录表单"""
-    username = StringField('用户名', validators=[Required()])
-    password = PasswordField('密码', validators=[Required()])
-    remember_me = BooleanField('记住我')
+    username = StringField('用户名', validators=[DataRequired()])
+    password = PasswordField('密码', validators=[DataRequired()])
+    remember_me = BooleanField('记住我', default=False)
     submit = SubmitField('登录')
 
 
@@ -50,6 +50,6 @@ class BackForm(Form):
 class RterForm(Form):
     """注册表单"""
     username = StringField('用户名')
-    password = PasswordField('密码', validators=[Required(), EqualTo('password1', message="密码匹配")])
-    password1 = PasswordField('确认密码', validators=[Required()])
+    password = PasswordField('密码', validators=[DataRequired(), EqualTo('password1', message="密码匹配")])
+    password1 = PasswordField('确认密码', validators=[DataRequired()])
     submit = SubmitField('注册')

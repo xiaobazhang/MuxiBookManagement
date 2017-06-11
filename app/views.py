@@ -21,7 +21,7 @@
 from . import app, db
 from werkzeug.utils import secure_filename
 from functools import wraps
-from app.models import User, Book
+from app.models import User
 from app.forms import BookForm, GetForm, LoginForm, RterForm
 from flask import render_template, redirect, url_for, flash, request, session
 from flask_login import login_user, logout_user, login_required, current_user
@@ -62,9 +62,6 @@ def home():
         new_book_list: 最近录入新书列表(默认为6本, 依据时间[id]排序)
     """
     form = LoginForm()
-    new_book_list = Book.query.order_by('-id').all()
-    get_book_list = Book.query.filter_by(status=True).order_by('start desc').all()[:2]
-
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.verify_password(form.password.data):
@@ -72,11 +69,7 @@ def home():
             return redirect(url_for('user', id=current_user.id))
         flash('用户名或密码错误!')
 
-    range_book_count = range(len(new_book_list)/6 + 1)
-
-    return render_template('home.html', new_book_list=new_book_list,
-                           get_book_list=get_book_list, form=form,
-                           range_book_count=range_book_count)
+    return render_template('home.html', form=form)
 
 
 # 对所有访客可见

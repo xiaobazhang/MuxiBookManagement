@@ -4,9 +4,7 @@
     ~~~~~~~~~
 
         数据库文件
-
-            木犀图书是一个图书借阅管理网站，所以数据库主要提供图书、用户信息以及图书借阅状态与信息的存储
-
+            保存用户的数据库文件,其中表结构如下
             数据库tables:
                                                         books
 
@@ -24,7 +22,9 @@
                  id                         Integer, primary_key                          主键
                  username                   String                                        用户名
                  password                   password_hash                                 密码散列值
-                 book                       relationship                                  借阅书籍的属性
+                 user_type                  Integer                                       账户类型,学生,老师,管理员
+                 use_time                   Integer                                       使用时间
+                 use_flow                   Integer                                       使用流量(单位是M)
 """
 from . import db, login_manager, app
 from flask_login import UserMixin
@@ -40,35 +40,15 @@ else:
     import flask_whooshalchemy as whooshalchemy
 
 
-
-
-class Book(db.Model):
-    """图书类"""
-    __searchable__ = ['name', 'tag', 'summary']
-    __tablename__ = "books"
-    id = db.Column(db.Integer, primary_key = True)
-    url = db.Column(db.String(164))
-    name = db.Column(db.Text)
-    author = db.Column(db.Text)
-    tag = db.Column(db.String(164))
-    summary = db.Column(db.Text)
-    image = db.Column(db.String(164))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    status = db.Column(db.Boolean)
-    start = db.Column(db.String(164))
-    end = db.Column(db.String(164))
-
-    def __repr__(self):
-        return "%r :The instance of class Book" % self.name
-
-
 class User(db.Model, UserMixin):
     """用户类"""
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(164))
     password_hash = db.Column(db.String(164))
-    book = db.relationship('Book', backref="user", lazy="dynamic")
+    user_type = db.Column(db.Integer)
+    use_time = db.Column(db.Integer)
+    use_flow = db.Column(db.Integer)
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -93,6 +73,5 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return "%r :The instance of class User" % self.username
 
-
-if enable_search:
-    whooshalchemy.whoosh_index(app, Book)
+# if enable_search:
+#    whooshalchemy.whoosh_index(app, Book)
