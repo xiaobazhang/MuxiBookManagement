@@ -34,8 +34,11 @@
 				<input type="submit" class="btn go" value="登录">
 
 	 </form>
-
-	 <div class="btn cancel"><a href="javascript:void(0)" onclick="hideBorderLog()">取消</a>
+<a href="javascript:void(0)" onclick="hideBorder()">
+	<div class="close" id="close">
+	</div>
+</a>
+<!--div class="btn cancel"><a href="javascript:void(0)" onclick="hideBorderLog()">取消</a-->
 </div>
 {% endblock %}
 
@@ -44,65 +47,6 @@
 <div class="bar" id="bar">
 	<div class="progress"></div>
 </div>
-
-<div class="left">
-			   <div class="content">新增图书
-			   		<div id="next" class="btn"></div>
-					<div id="prev" class="btn"></div>
-
-			   </div>
-
-		  <div class="showbox">
-		   <ul class="slide">
-        {% for i in range_book_count %}
-		  	<li class="box">
-			   {% for book in new_book_list[i*6:(i+1)*6] %}
-				     <div class="new_book">
-					          <a href="/info/{{ book.name }}"><img src={{ book.image }} alt="" class="book"></a>
-                    <div class="book_information">
-							      <a href="/info/{{ book.name }}">
-						                <p class="title">{{ book.name}}</p>
-						 	              <p class="author">{{ book.author }}</p>
-						        </a>
-						 <div class="book_tags">
-						 <p>
-						    类别：{{ book.tag }}<br/>
-								<br/>
-								{{ book.summary[:100] }}...
-						 </p>
-						 </div>
-						  </div>
-					  </div>
-			{% endfor %}
-			</li>
-    {% endfor %}
-		  </ul>
-	    </div>
-	</div>
-
-		<div class="right">
-				<span class="content content_right">最近借阅</span>
-				{% for book in get_book_list %}
-				 <div class="new_book">
-					<a href="#"><img src={{ book.image }} alt="" class="book"></a>
-						<div class="book_information ">
-							<a href="#">
-								<p class="title">{{ book.name }}</p>
-
-								<p class="author">{{ book.author }}</p>
-							</a>
-						 		<div class="book_tags">
-						 			<a href="/user/{{ book.user.id }}"><p>借阅者：{{ book.user.username}}</p></a>
-									<p>到期时间：{{ book.end }}</p>
-							 	</div>
-						</div>
-
-				</div>
-
-			{% endfor %}
-		</div>
-</div>
-
 
 {% endblock %}
 
