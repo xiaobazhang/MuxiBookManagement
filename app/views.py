@@ -69,7 +69,7 @@ def home():
             return redirect(url_for('user', id=current_user.id))
         flash('用户名或密码错误!')
 
-    return render_template('home.html', form=form)
+    return render_template('base.html', form=form)
 
 
 # 对所有访客可见
