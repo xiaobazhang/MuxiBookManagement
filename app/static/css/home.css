@@ -5,19 +5,48 @@
 }
 
 .header {
-    width: 1100px;
-    position: absolute;
+    width: 200px;
+    height: 80px;
+    float: left;
     margin: 10px auto 0;
-    height: 100px;
 }
 
-.header .menu {
-
+.menu {
+    width: 400px;
+    height: 80px;
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    line-height: 38px;
+    text-align: center;
+    right: -10%;
+    float: right;
 }
+
+.menu .nav {
+    display: block;
+    list-style: none;
+    text-align: center;
+    margin-top: 3px;
+    height: 80px;
+    width: auto;
+    z-index: 1001;
+}
+
+.menu .nav a {
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    line-height: 30px;
+    text-decoration: none;
+}
+
 
 .nav_image {
-    height: 400px;
-    width: 240px;
+    height: 80px;
+    width: 300px;
     position: absolute;
     z-index: 1002;
 }
