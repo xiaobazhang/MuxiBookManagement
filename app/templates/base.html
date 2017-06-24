@@ -19,6 +19,7 @@
 
     {% block css_file %}
     <link rel="stylesheet" type="text/css" href="/static/css/home.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
     {% endblock %}
 </head>
 <body onclick="fade()" class="bgimage">
@@ -27,12 +28,26 @@
         <img src="/static/image/home/fly.png">
     </div>
     <ul class="menu">
-        <li class="nav">
-            <a href="/">公司首页</a>
-            <a href="/">公司产品</a>
-            <a href="/">登录</a>
-            <a href="/">联系我们</a>
-        </li>
+        <li class="nav"><a href="/">首页</a></li>
+        <li class="nav"><a href="/">产品</a></li>
+        {% if current_user.is_authenticated %}
+        <li class="nav user"><a href="/user/{{ current_user.id }}">Hi!{{ current_user.username }}</a></li>
+        <li class="nav log"><a href="/logout">LOG OUT</a></li>
+        {% else %}
+        <li class="nav log"><a href="javascript:;" onclick="showBorderLog()">登录</a></li>
+        <div id="content_log" class="light_content users">
+            {% block form_content %}
+
+
+            {% endblock %}
+        </div>
+
+        {% endif %}
+
+
+        <li class="nav"><a href="/login" onclick="showLogin()">登录</a></li>
+        <li class="nav"><a href="/">下载</a></li>
+        <li class="nav"><a href="/">联系我们</a></li>
     </ul>
 
 </div>

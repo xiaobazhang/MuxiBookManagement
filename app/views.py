@@ -61,15 +61,7 @@ def home():
 
         new_book_list: 最近录入新书列表(默认为6本, 依据时间[id]排序)
     """
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is not None and user.verify_password(form.password.data):
-            login_user(user)
-            return redirect(url_for('user', id=current_user.id))
-        flash('用户名或密码错误!')
-
-    return render_template('home.html', form=form)
+    return render_template('base.html')
 
 
 # 对所有访客可见
@@ -140,6 +132,23 @@ def info(name):
         else:
             flash('光阴似箭、岁月如梭,时间－你不能篡改她，更不能逆转她!')
     return render_template('info.html', book=book, form=form,  form2=form2)
+
+
+@app.route('/login', methods=["POST", "GET"])
+@login_required
+def login():
+    """用户登录接口"""
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user)
+            return redirect(url_for('user', id=current_user.id))
+        flash('用户名或密码错误!')
+
+    return render_template('new_login.html', title="Sign In", form=form)
+
 
 
 # 只对管理员可见

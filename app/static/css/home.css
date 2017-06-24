@@ -1,14 +1,39 @@
 .bgimage {
-    background-image: url("../image/login/loginBac.jpg");;
+    background: transparent url(../image/login/loginBac.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
+    z-index: -999;
 }
+
+.bgimage img {
+    width: 200px;
+    height: 80px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff843;
+}
+
+.container {
+    margin: 70px auto;
+    width: 1094px;
+    background-color: #eee;
+    border: transparent solid;
+    overflow: hidden;
+    margin: -10px auto 0;
+    padding-bottom: 30px;
+}
+
 
 .header {
     width: 100%;
     height: 80px;
-    float: left;
     margin: 10px auto 0;
+    position: relative;
 }
 
 .nav_image {
@@ -20,8 +45,7 @@
 
 .header .menu {
     height: 60px;
-    left: 290px;
-    right: 0px;
+    right: 5%;
     position: absolute;
 }
 
@@ -32,15 +56,16 @@
 .menu .nav {
     display: inline-block;
     text-align: center;
-    margin-top: 10px;
+    list-style: none;
+    margin: 5px 10px 5px 10px;
     width: auto;
     z-index: 1001;
 }
 
 .menu .nav a {
     display: inline-block;
-    color: blueviolet;
-    width: 120px;
+    color: black;
+    width: 100px;
     height: 30px;
     font-size: 23px;
     line-height: 10px;
@@ -48,18 +73,8 @@
 }
 
 .menu .nav a:hover {
-    color: #fff843;
+    color: blueviolet;
 }
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    color: #fff843;
-}
-
-
 
 
 .flashes {

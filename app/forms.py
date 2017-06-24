@@ -28,10 +28,10 @@ class BookForm(Form):
 
 class LoginForm(Form):
     """登录表单"""
-    username = StringField('用户名', validators=[DataRequired()])
-    password = PasswordField('密码', validators=[DataRequired()])
-    remember_me = BooleanField('记住我', default=False)
-    submit = SubmitField('登录')
+    username = StringField('username', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])
+    remember_me = BooleanField('remember_me', default=False)
+    submit = SubmitField('login')
 
 
 class GetForm(Form):
