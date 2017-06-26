@@ -24,3 +24,8 @@ function login() {
 
     }
 }
+
+function showLogin() {
+    document.getElementById('content_log').style.display = 'block';
+    document.getElementById('fade_log').style.display = 'block';
+}

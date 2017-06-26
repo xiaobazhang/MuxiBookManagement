@@ -1,23 +1,5 @@
 # coding: utf-8
 
-"""
-    views.py
-    ~~~~~~~~
-
-        木犀图书视图函数
-        url                                        func
-        /;/home                           1.最近录入(6条)， 2.最近借阅
-        /logout                           登出
-        /bookin                           录入新书(只有管理员可见)
-        /search                           站内搜索（支持两种模式）
-        /search_results                   搜索结果页(提供借阅表单) 关于借阅状态
-        /admin                            后台管理（只有管理员可见)
-        /rter                             注册接口 (只有管理员可见)
-        /<current_user>                   个人信息页(最近借阅)(快要到期 3天)
-                      已过期的图书会flash消息提示
-                           有情怀的flash提示
-"""
-
 from . import app, db
 from werkzeug.utils import secure_filename
 from functools import wraps
@@ -29,17 +11,6 @@ from urllib2 import urlopen
 import json
 import datetime
 import os
-
-"""
-                           ｜
-              /------------/\-------------\
-            /                              \
-           |          木犀团队棒棒嗒         |
-"""
-# ------------------------------------------------------
-#         """  我们在路上    前方不会太远 """
-# ------------------------------------------------------
-
 
 # 允许上传的文件扩展名
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -53,14 +24,6 @@ def allowed_file(filename):
 # 对所有访客可见
 @app.route('/', methods=["POST", "GET"])
 def home():
-    """
-    首页视图函数
-
-        1. 最近录入
-        2. 最近借阅
-
-        new_book_list: 最近录入新书列表(默认为6本, 依据时间[id]排序)
-    """
     return render_template('base.html')
 
 
@@ -135,9 +98,8 @@ def info(name):
 
 
 @app.route('/login', methods=["POST", "GET"])
-@login_required
 def login():
-    """用户登录接口"""
+    """用户登录接口
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -146,8 +108,8 @@ def login():
             login_user(user)
             return redirect(url_for('user', id=current_user.id))
         flash('用户名或密码错误!')
-
-    return render_template('new_login.html', title="Sign In", form=form)
+"""
+    return render_template('new_login.html')
 
 
 

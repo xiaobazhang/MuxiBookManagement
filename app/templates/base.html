@@ -3,7 +3,9 @@
 <link href="/static/image/login/favicon.ico" rel="icon" type="image/x-icon"/>
 <head>
     <meta charset="UTF-8">
-    {% block title %}{% endblock %}
+    {% block title %}
+
+    {% endblock %}
     <!-- 消息闪现 -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -21,6 +23,12 @@
     <link rel="stylesheet" type="text/css" href="/static/css/home.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
     {% endblock %}
+
+    {% block script_file %}
+    <script type="text/javascript" href="/static/js/login/login.js"></script>
+    <script type="text/javascript" href="/static/js/login/base.js"></script>
+    {% endblock %}
+
 </head>
 <body onclick="fade()" class="bgimage">
 <div class="header">
@@ -31,26 +39,48 @@
         <li class="nav"><a href="/">首页</a></li>
         <li class="nav"><a href="/">产品</a></li>
         {% if current_user.is_authenticated %}
-        <li class="nav user"><a href="/user/{{ current_user.id }}">Hi!{{ current_user.username }}</a></li>
-        <li class="nav log"><a href="/logout">LOG OUT</a></li>
+        <li class="nav"><a href="/user/{{ current_user.id }}">Hi!{{ current_user.username }}</a></li>
+        <li class="nav"><a href="/logout">LOG OUT</a></li>
         {% else %}
-        <li class="nav log"><a href="javascript:;" onclick="showBorderLog()">登录</a></li>
-        <div id="content_log" class="light_content users">
-            {% block form_content %}
+        <!--li class="nav"><a href="javascript:;" onclick="showLogin()">登录</a></li-->
+        <li class="nav"><a href="/login">登录</a></li>
+        {% block form_content %}
 
+        <!--li class="nav"><a href="javascript:void(0)" onclick="showBorder()">登录</a></li>
+        <div id="login_frame">
+            <p id="image_logo"><img src="/static/image/login/fly.png"></p>
+            <form method="post" action="/static/js/login/login.js">
 
-            {% endblock %}
-        </div>
+                <p>
+                    <label class="label_input">
+                        用户名
+                    </label>
+                    <input type="text" id="username" class="text_field"/>
+                </p>
+
+                <p><label class="label_input">密码</label><input type="text" id="password" class="text_field"/></p>
+
+                <div id="login_control">
+                    <input type="button" id="btn_login" value="登录" onclick="login();"/>
+                    <a id="forget_pwd" href="forget_pwd.html">忘记密码?</a>
+                </div>
+            </form>
+
+        </div-->
+        {% endblock %}
+
 
         {% endif %}
-
-
-        <li class="nav"><a href="/login" onclick="showLogin()">登录</a></li>
         <li class="nav"><a href="/">下载</a></li>
         <li class="nav"><a href="/">联系我们</a></li>
     </ul>
 
 </div>
 
+{% block page_content %}
+
+{% endblock %}
+
 </body>
 </html>
+
