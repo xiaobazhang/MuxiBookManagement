@@ -3,5 +3,12 @@
  */
 //消息闪现
 function fade() {
-    $("#flashes").fadeOut('fast');
+    //$("#flashes").fadeOut('fast');
+}
+
+function showLogin() {
+    document.getElementById('light').style.display = 'block';
+}
+function hideLogin() {
+    document.getElementById('light').style.display = 'none';
 }

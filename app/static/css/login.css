@@ -4,12 +4,12 @@ body {
     background-repeat: no-repeat;
 }
 
-#login_frame {
-    width: 400px;
-    height: 260px;
+.login_frame {
+    display: none;
+    width: 460px;
+    height: 325px;
     padding: 13px;
-
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     margin-left: -200px;
@@ -20,6 +20,35 @@ body {
     border-radius: 10px;
     text-align: center;
 }
+
+/* basic style */
+.close {
+    /* still bad on picking color */
+    background: rgba(240, 255, 255, 0.5);
+    color: red;
+    /* make a round button */
+    border-radius: 15px;
+    /* center text */
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    font-size: 22px;
+    padding: 1px;
+}
+
+/* use cross as close button */
+.close::before {
+    content: "\2716";
+}
+
+/* place the button on top-right */
+.close {
+    top: -10px;
+    right: -10px;
+    position: absolute;
+}
+
 
 form p > * {
     display: inline-block;
@@ -54,40 +83,61 @@ form p > * {
 }
 
 .checkbox_style {
-
-}
-
-#btn_login {
-    font-size: 14px;
-    font-family: 宋体;
-
-    width: 120px;
-    height: 28px;
-    line-height: 28px;
-    text-align: center;
-
-    color: white;
-    background-color: #3BD9FF;
-    border-radius: 6px;
-    border: 0;
-
-    float: left;
+    position: relative;
+    right: 58px;
+    top: 5px;
 }
 
 #forget_pwd {
-    font-size: 12px;
-    color: white;
+    font-size: 15px;
+    color: black;
     text-decoration: none;
     position: relative;
-    float: right;
+    left: 110px;
     top: 5px;
 
+}
+
+#remmber_me {
+    font-size: 15px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+    right: 62px;
+    top: 5px;
+}
+
+#register_user {
+    font-size: 15px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+    left: 90px;
+    top: 86px;
 }
 
 #forget_pwd:hover {
     color: blue;
     text-decoration: underline;
 }
+
+#btn_login {
+    font-size: 14px;
+    font-family: 宋体;
+    position: absolute;
+    top: 272px;
+    left: 160px;
+    width: 165px;
+    height: 35px;
+    line-height: 28px;
+    text-align: center;
+    color: white;
+    background-color: #3BD9FF;
+    border-radius: 6px;
+    border: 0;
+    float: left;
+}
+
 
 #login_control {
     padding: 0 28px;

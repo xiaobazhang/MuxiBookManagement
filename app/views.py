@@ -24,6 +24,13 @@ def allowed_file(filename):
 # 对所有访客可见
 @app.route('/', methods=["POST", "GET"])
 def home():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user)
+            return redirect(url_for('user', id=current_user.id))
+        flash('用户名或密码错误!')
     return render_template('base.html')
 
 
