@@ -39,7 +39,7 @@ sys.setdefaultencoding('utf-8')
 
 manager = Manager(app)
 migrate = Migrate(app, db)
-admin = Admin(app, name='MuxiBook')
+admin = Admin(app, name='suli')
 
 
 def make_shell_context():

@@ -75,6 +75,7 @@ form p > * {
 }
 
 .text_field {
+    font-size: 15px;
     width: 278px;
     height: 28px;
     border-top-right-radius: 5px;
@@ -98,7 +99,7 @@ form p > * {
 
 }
 
-#remmber_me {
+#remember_me {
     font-size: 15px;
     color: black;
     text-decoration: none;

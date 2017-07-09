@@ -25,6 +25,7 @@
                  user_type                  Integer                                       账户类型,学生,老师,管理员
                  use_time                   Integer                                       使用时间
                  use_flow                   Integer                                       使用流量(单位是M)
+                 online_type                Integer                                       在线状态
 """
 from . import db, login_manager, app
 from flask_login import UserMixin
@@ -49,6 +50,7 @@ class User(db.Model, UserMixin):
     user_type = db.Column(db.Integer)
     use_time = db.Column(db.Integer)
     use_flow = db.Column(db.Integer)
+    online_type = db.Column(db.Integer)
 
     @login_manager.user_loader
     def load_user(user_id):

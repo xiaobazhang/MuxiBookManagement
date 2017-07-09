@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block css_file %}
+<link rel="stylesheet" type="text/css" href="/static/css/register.css"/>
+{% endblock %}
+
+
+{% block register %}
+
+
+<div id="register" class="reg_base">
+    <form method="post">
+        <a href="javascript:;" onclick="hideRegister()">
+            <div class="reg_close" id="reg_close"></div>
+        </a>
+        <p class="reg_text">注册用户</p>
+        <p class="reg_input">{{
+            form.username.label(class="reg_label_input")}}{{form.username(class="reg_text_field")}}</p>
+        <p class="reg_input">{{
+            form.user_email.label(class="reg_label_input")}}{{form.user_email(class="reg_text_field")}}</p>
+        <p class="reg_input">{{
+            form.password.label(class="reg_label_input")}}{{form.password(class="reg_text_field")}}</p>
+        <p class="reg_input">{{
+            form.password1.label(class="reg_label_input")}}{{form.password1(class="reg_text_field")}}</p>
+        <p class="reg_input">
+            <label class="reg_font"><img class="reg_image_size" src="/static/image/login/yanzhengma.jpg"></label>
+            {{ form.verification_code(class="reg_text_yanzhengma")}}
+        </p>
+        <p>{{ form.submit(class="reg_btn_login") }}</p>
+    </form>
+
+</div>
+
+{% endblock %}
+

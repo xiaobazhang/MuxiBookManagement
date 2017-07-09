@@ -4,10 +4,12 @@ from . import app, db
 from werkzeug.utils import secure_filename
 from functools import wraps
 from app.models import User
-from app.forms import BookForm, GetForm, LoginForm, RterForm
+from app.forms import LoginForm, RterForm
 from flask import render_template, redirect, url_for, flash, request, session
 from flask_login import login_user, logout_user, login_required, current_user
 from urllib2 import urlopen
+from verification_code import create_validate_code
+import StringIO
 import json
 import datetime
 import os
@@ -26,31 +28,13 @@ def allowed_file(filename):
 def home():
     form = LoginForm()
     if form.validate_on_submit():
+        print "name : %s" % (form.username)
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             return redirect(url_for('user', id=current_user.id))
         flash('用户名或密码错误!')
-    return render_template('base.html')
-
-
-# 对所有访客可见
-@app.route('/search', methods=["POST", "GET"])
-def search():
-    """
-    搜索视图函数
-
-        1. 搜索表单
-        2. 显示搜索结果列表(最多加载5条搜索结果)
-
-        搜索模式：
-            1. 书名搜索（书名必须正确）
-            2. 类别搜索（返回类别的图书：后台、前端、设计、互联网、其他）
-    """
-    if request.methos == 'POST':
-        """前端 input 标签 action 实现重定向
-           递交 search_results 处理"""
-        pass
+    return render_template('base.html', form=form)
 
 
 # 对所有访客可见
@@ -104,36 +88,20 @@ def info(name):
     return render_template('info.html', book=book, form=form,  form2=form2)
 
 
-@app.route('/login', methods=["POST", "GET"])
-def login():
-    """用户登录接口
-
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is not None and user.verify_password(form.password.data):
-            login_user(user)
-            return redirect(url_for('user', id=current_user.id))
-        flash('用户名或密码错误!')
-"""
-    return render_template('new_login.html')
-
-
-
 # 只对管理员可见
-@app.route('/rter', methods=["POST", "GET"])
-@login_required
+@app.route('/register', methods=["POST", "GET"])
 def rter():
-    """用户注册接口"""
-    if current_user.username == 'neo1218':
-        form = RterForm()
-        if form.validate_on_submit():
-            u = User(username=form.username.data, password=form.password.data)
-            db.session.add(u)
-            db.session.commit()
-        return render_template('r.html', form=form)
-    else:
-        return redirect(url_for('home'))
+    form = RterForm()
+    image_code, str = create_validate_code()
+    buf = StringIO.StringIO()
+    path = os.path.abspath('.')
+    image_code.save(path + '/app/static/image/login/yanzhengma.jpg', 'JPEG')
+    print str
+    if form.validate_on_submit():
+        u = User(username=form.username.data, password=form.password.data)
+        db.session.add(u)
+        db.session.commit()
+    return render_template('register.html', form=form)
 
 
 # 只对管理员可见
@@ -190,7 +158,7 @@ def user(id):
         提供用户还书按钮
 
         借阅图书默认按归还时间顺序排序
-    """
+
     book_list = Book.query.filter_by(user_id=current_user.id).order_by('end').all()
     time_done_book = []
     time_dead_book = []
@@ -204,7 +172,6 @@ def user(id):
             time_dead_book.append(book)
 
     if request.method == "POST":
-        """在前端input标签的重定向页面进行处理"""
         return redirect(url_for('user', id=current_user.id))
 
     books = Book.query.filter_by(name=request.args.get('back'), user_id=current_user.id).all()
@@ -225,6 +192,9 @@ def user(id):
                            range_book_count=range_book_count,
                            range_timedonebook_count=range_timedonebook_count,
                            session=session)
+    """
+    print "login"
+    render_template('forget_pwd.html')
 
 
 @app.route('/upload', methods=["POST", "GET"])

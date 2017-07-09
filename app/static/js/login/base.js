@@ -12,3 +12,12 @@ function showLogin() {
 function hideLogin() {
     document.getElementById('light').style.display = 'none';
 }
+function showRegister() {
+    document.getElementById('light').style.display = 'none';
+    /*document.getElementById('register').style.display = 'block'*/
+    window.location.href = "/register"
+}
+
+function hideRegister() {
+    document.getElementById('register').style.display = 'none';
+}

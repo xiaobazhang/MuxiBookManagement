@@ -5,7 +5,12 @@
     z-index: -999;
 }
 
-.bgimage img {
+/*.bgimage img {
+    width: 200px;
+    height: 80px;
+}*/
+
+.image_size {
     width: 200px;
     height: 80px;
 }
