@@ -1,7 +1,8 @@
 body {
-    background-image: url("../image/login/loginBac.jpg");;
+    /*background-image: url("../image/login/loginBac.jpg");;
     background-size: 100%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
+    background-color: white;
 }
 
 .reg_base {
@@ -15,10 +16,11 @@ body {
     margin-left: -200px;
     margin-top: -200px;
 
-    background-color: rgba(240, 255, 255, 0.5);
+    background-color: rgba(240, 255, 255, 0.6);
 
     border-radius: 10px;
     text-align: center;
+    z-index: 5555;
 }
 
 .reg_text {

@@ -1,57 +1,177 @@
 <!--home.html-->
-{% extends 'base1.html' %}
+{% extends 'base.html' %}
 
 {% block title %}<title>苦瓜科技</title>{% endblock %}
 
 {% block css_file %}
-  <link href="/static/css/First.css" rel="stylesheet" type="text/css" />
-  <link href="/static/css/reset.css" rel="stylesheet" type="text/css" />
-  <link href="/static/css/new_First.css" rel="stylesheet", type="text/css" />
 
 {% endblock %}
-
-
-{% block form_content %}
-
-<div class="dengLu">登录</div>
-  <form method="post">
-	   <div class="logOn_input">
-				<label class="logo name" for="name"></label>
-				<div class="logOn_input_text">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-       </div>
-				<span class="logOn_text">姓名</span>
-			</div>
-			<div class="logOn_input">
-				<label class="logo code" for="code"></label>
-				<!--input type="password" class="logOn_input_text"-->
-        <div class="logOn_input_text">
-          {{ form.password }}
-        </div>
-				<span class="logOn_text">密码</span>
-			</div>
-				<input type="submit" class="btn go" value="登录">
-
-	 </form>
-<a href="javascript:void(0)" onclick="hideBorder()">
-	<div class="close" id="close">
-	</div>
-</a>
-<!--div class="btn cancel"><a href="javascript:void(0)" onclick="hideBorderLog()">取消</a-->
-</div>
-{% endblock %}
-
-{% block page_content %}
-
-<div class="bar" id="bar">
-	<div class="progress"></div>
-</div>
-
-{% endblock %}
-
 
 {% block script_file %}
-  <script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
-  <script type="text/javascript" src="/static/js/shouye.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+	$(window).load(function () {
+		$('.flexslider').flexslider({
+			slideshowSpeed: 4000, //展示时间间隔ms
+			animationSpeed: 400, //滚动时间ms
+			touch: true, //是否支持触屏滑动
+			directionNav: true
+		});
+	});
+</script>
+
+{% endblock%}
+
+
+{% block page_content %}
+<div class="page">
+	<div class="feature">
+		<div class="feature_roll">
+			<div class="flex-viewer" style="overflow: hidden;position: relative;">
+				<div class="flexslider">
+					<ul class="slides">
+						<li><img src="/static/image/s1.jpg"/></li>
+						<li><img src="/static/image/s2.jpg"/></li>
+						<li><img src="/static/image/s3.jpg"/></li>
+						<li><img src="/static/image/s4.jpg"/></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div id="content">
+	<div class="container">
+		<div class="row">
+			<div class="col-model">
+				<div class="col-model-panel">
+					<div class="panel-base">
+						<h3 class="panel-header">智能加速</h3>
+					</div>
+					<div class="panel-body">
+						<img class="panel-body-image" alt="智能加速" src="/static/image/rocket.png">
+						<span class="panel-body-content">
+							特有的智能加速技术<br>
+							自动处理国内外流量<br>
+							国内直连，国外通过VPN<br>
+							没有最快，只有更快!!
+						</span>
+						<div class="panel-footer">
+							<a href="/" class="btn btn-basic">
+								最快的速度
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-model">
+				<div class="col-model-panel">
+					<div class="panel-base">
+						<h3 class="panel-header">多国线路</h3>
+					</div>
+					<div class="panel-body">
+						<img class="panel-body-image" alt="智能加速" src="/static/image/word.jpg">
+						<span class="panel-body-content">
+							美国，日本，新加坡<br>
+							台湾，香港，英国<br>
+							17个机房，51条中国优化线路<br>
+							每条线路自动均衡负载
+						</span>
+						<div class="panel-footer">
+							<a href="/" class="btn btn-basic">
+								最低的价格
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-model">
+				<div class="col-model-panel">
+					<div class="panel-base">
+						<h3 class="panel-header">畅游全球</h3>
+					</div>
+					<div class="panel-body">
+						<img class="panel-body-image" alt="智能加速" src="/static/image/link.png">
+						<span class="panel-body-content">
+							流畅访问国外的：搜索，邮箱<br>
+							社交网络，视频网站，音乐<br>
+							相册，网盘，博客，游戏等<br>
+							精彩世界，无限畅游!
+						</span>
+						<div class="panel-footer">
+							<a href="/" class="btn btn-basic">
+								超大流量
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-model">
+				<div class="col-model-panel">
+					<div class="panel-base">
+						<h3 class="panel-header">优质服务</h3>
+					</div>
+					<div class="panel-body">
+						<img class="panel-body-image" alt="智能加速" src="/static/image/server.png">
+						<span class="panel-body-content">
+							3天内全额退款保障<br>
+							多渠道沟通：服务单，邮件,<br>
+							主流社交网络<br>
+							我们用心为你服务 (^_^)!!
+						</span>
+						<div class="panel-footer">
+							<a href="/" class="btn btn-basic">
+								立即使用
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="row-1">
+			<div class="col-md-1">
+				<h3 class="col-header-style">稳定可靠</h3>
+				<ul class="col-md-grey">
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+				</ul>
+			</div>
+			<div class="col-md-1">
+				<h3 class="col-header-style">稳定可靠</h3>
+				<ul class="col-md-grey">
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+				</ul>
+			</div>
+			<div class="col-md-1">
+				<h3 class="col-header-style">稳定可靠</h3>
+				<ul class="col-md-grey">
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+					<li>所有传输报文全程加密</li>
+				</ul>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+</div>
 {% endblock %}

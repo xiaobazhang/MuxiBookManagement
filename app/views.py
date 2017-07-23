@@ -9,6 +9,11 @@ from flask import render_template, redirect, url_for, flash, request, session
 from flask_login import login_user, logout_user, login_required, current_user
 from urllib2 import urlopen
 from verification_code import create_validate_code
+from email import encoders
+from email.header import Header
+from email.mime.text import MIMEText
+from email.utils import parseaddr, formataddr
+import smtplib
 import StringIO
 import json
 import datetime
@@ -26,6 +31,11 @@ def allowed_file(filename):
 # 对所有访客可见
 @app.route('/', methods=["POST", "GET"])
 def home():
+    return render_template('home.html')
+
+
+@app.route('/login', methods=["POST", "GET"])
+def login():
     form = LoginForm()
     if form.validate_on_submit():
         print "name : %s" % (form.username)
@@ -34,7 +44,93 @@ def home():
             login_user(user)
             return redirect(url_for('user', id=current_user.id))
         flash('用户名或密码错误!')
-    return render_template('base.html', form=form)
+    return render_template('login.html', form=form)
+
+
+# 对所有登录用户可见
+@app.route('/logout')
+@login_required
+def logout():
+    """退出视图函数"""
+    logout_user()
+    return redirect(url_for('/'))
+
+
+# 对登录用户可见
+@app.route('/user/<int:id>', methods=["POST", "GET"])
+def user(id):
+    """
+    用户个人信息页
+        显示该用户历史借阅
+        显示该用户快要过期的书（3天为界）
+
+        提供用户还书按钮
+
+        借阅图书默认按归还时间顺序排序
+
+    book_list = Book.query.filter_by(user_id=current_user.id).order_by('end').all()
+    time_done_book = []
+    time_dead_book = []
+
+    for book in book_list:
+        delta = (datetime.datetime.strptime(book.end, "%Y-%m-%d %H:%M:%S") - \
+            datetime.datetime.now()).total_seconds()
+        if delta <= 3*24*60*60 and delta > 0:
+            time_done_book.append(book)
+        if delta <= 0:
+            time_dead_book.append(book)
+
+    if request.method == "POST":
+        return redirect(url_for('user', id=current_user.id))
+
+    books = Book.query.filter_by(name=request.args.get('back'), user_id=current_user.id).all()
+    for book in books:
+        book.status = False
+        book.start = None
+        book.end = None
+        book.user_id = None
+        flash('%s 已归还!' % book.name)
+        return redirect(url_for('user', id=current_user.id))
+
+    range_book_count = range(len(book_list)/3 + 1)
+    range_timedonebook_count = range(len(time_done_book)/3 + 1)
+
+    return render_template('user.html',
+                           time_done_book=time_done_book[:2],
+                           book_list=book_list,
+                           range_book_count=range_book_count,
+                           range_timedonebook_count=range_timedonebook_count,
+                           session=session)
+    """
+    print "login"
+    render_template('forget_pwd.html')
+
+
+# 只对管理员可见
+@app.route('/register', methods=["POST", "GET"])
+def rter():
+    form = RterForm()
+    image_code, str = create_validate_code()
+    buf = StringIO.StringIO()
+    path = os.path.abspath('.')
+    image_code.save(path + '/app/static/image/login/yanzhengma.jpg', 'JPEG')
+    print str
+    if form.validate_on_submit():
+        u = User(username=form.username.data, password=form.password.data, user_type=1, use_time=0, use_flow=0,
+                 online_type=False, confirmed=False)
+        db.session.add(u)
+        db.session.commit()
+        token = user.generate_confirmation_token()  ## 获取token
+        sendemail(user.email, 'Confirm Your Account', 'auth/email/confirm', user=user, token=token)
+
+    return render_template('register.html', form=form)
+
+
+
+
+
+
+
 
 
 # 对所有访客可见
@@ -89,22 +185,6 @@ def info(name):
 
 
 # 只对管理员可见
-@app.route('/register', methods=["POST", "GET"])
-def rter():
-    form = RterForm()
-    image_code, str = create_validate_code()
-    buf = StringIO.StringIO()
-    path = os.path.abspath('.')
-    image_code.save(path + '/app/static/image/login/yanzhengma.jpg', 'JPEG')
-    print str
-    if form.validate_on_submit():
-        u = User(username=form.username.data, password=form.password.data)
-        db.session.add(u)
-        db.session.commit()
-    return render_template('register.html', form=form)
-
-
-# 只对管理员可见
 @app.route('/bookin', methods=["POST", "GET"])
 @login_required
 def bookin():
@@ -137,64 +217,6 @@ def bookin():
     else:
         return redirect(url_for('home'))
 
-
-# 对所有登录用户可见
-@app.route('/logout')
-@login_required
-def logout():
-    """退出视图函数"""
-    logout_user()
-    return redirect(url_for('home'))
-
-
-# 对登录用户可见
-@app.route('/user/<int:id>', methods=["POST", "GET"])
-def user(id):
-    """
-    用户个人信息页
-        显示该用户历史借阅
-        显示该用户快要过期的书（3天为界）
-
-        提供用户还书按钮
-
-        借阅图书默认按归还时间顺序排序
-
-    book_list = Book.query.filter_by(user_id=current_user.id).order_by('end').all()
-    time_done_book = []
-    time_dead_book = []
-
-    for book in book_list:
-        delta = (datetime.datetime.strptime(book.end, "%Y-%m-%d %H:%M:%S") - \
-            datetime.datetime.now()).total_seconds()
-        if delta <= 3*24*60*60 and delta > 0:
-            time_done_book.append(book)
-        if delta <= 0:
-            time_dead_book.append(book)
-
-    if request.method == "POST":
-        return redirect(url_for('user', id=current_user.id))
-
-    books = Book.query.filter_by(name=request.args.get('back'), user_id=current_user.id).all()
-    for book in books:
-        book.status = False
-        book.start = None
-        book.end = None
-        book.user_id = None
-        flash('%s 已归还!' % book.name)
-        return redirect(url_for('user', id=current_user.id))
-
-    range_book_count = range(len(book_list)/3 + 1)
-    range_timedonebook_count = range(len(time_done_book)/3 + 1)
-
-    return render_template('user.html',
-                           time_done_book=time_done_book[:2],
-                           book_list=book_list,
-                           range_book_count=range_book_count,
-                           range_timedonebook_count=range_timedonebook_count,
-                           session=session)
-    """
-    print "login"
-    render_template('forget_pwd.html')
 
 
 @app.route('/upload', methods=["POST", "GET"])

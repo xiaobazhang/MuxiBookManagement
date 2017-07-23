@@ -21,55 +21,108 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/home.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/flexslider.css">
     {% block css_file %}
     {% endblock %}
 
     <script type="text/javascript" src="/static/js/login/login.js"></script>
     <script type="text/javascript" src="/static/js/login/base.js"></script>
 
-</head>
-<body onclick="fade()" class="bgimage">
-<div class="header">
-    <div class="nav_image">
-        <img class="image_size" src="/static/image/home/fly.png">
-    </div>
-    <ul class="menu">
-        <li class="nav"><a href="/">首页</a></li>
-        <li class="nav"><a href="/">产品</a></li>
-        {% if current_user.is_authenticated %}
-        <li class="nav"><a href="/user/{{ current_user.id }}">Hi!{{ current_user.username }}</a></li>
-        <li class="nav"><a href="/logout">LOG OUT</a></li>
-        {% else %}
-        <li class="nav"><a href="javascript:;" onclick="showLogin()">登录</a></li>
-        <div id="light" class="login_frame">
-            <p id="image_logo"><img class="image_size" src="/static/image/login/fly.png"></p>
-            <form method="post">
-                {{ form.hidden_tag() }}
-                <a href="javascript:;" onclick="hideLogin()">
-                    <div class="close" id="close"></div>
-                </a>
-                <p>{{form.username.label(class="label_input")}}{{form.username(class="text_field")}}</p>
-                <p>{{form.password.label(class="label_input")}}{{form.password(class="text_field")}}</p>
-                <div id="login_control">
-                    <input type="checkbox" class="checkbox_style"/>
-                    <a id="remember_me" name="remember_me" href="forget_pwd.html">记住密码</a>
-                    <a id="forget_pwd" href="forget_pwd.html">忘记密码</a>
-                    {{form.submit(id="btn_login")}}
-                    <a id="register_user" href="javascript:;" onclick="showRegister()">注册用户</a>
-                </div>
-            </form>
-        </div>
-        {% block register %}
-        {% endblock %}
-        {% endif %}
-        <li class="nav"><a href="/">下载</a></li>
-        <li class="nav"><a href="/">联系我们</a></li>
-    </ul>
-</div>
+    {% block script_file %}
 
+    {% endblock %}
+
+
+</head>
+<body onclick="fade()" class="body_style">
+<header class="header">
+    <div class="bgimage">
+        <div class="nav_image">
+            <img class="image_size" src="/static/image/home/fly.png">
+        </div>
+        <ul class="menu">
+            <li class="nav"><a href="/">首页</a></li>
+            <li class="nav"><a href="/">产品</a></li>
+            {% if current_user.is_authenticated %}
+            <li class="nav"><a href="/user/{{ current_user.id }}">{{ current_user.username }}</a></li>
+            <li class="nav"><a href="/logout">退出</a></li>
+            {% else %}
+            <li class="nav"><a href="javascript:;" onclick="showLogin()">登录</a></li>
+            {% endif %}
+            <li class="nav"><a href="/">下载</a></li>
+        </ul>
+    </div>
+</header>
+<!-- 滚动页 -->
 {% block page_content %}
 
 {% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+
+{% block code %}
+{% endblock %}
+
+<div class="bottom_style">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <h4 class="col-md-2-font">关于我们</h4>
+                <div class="col-md-content">
+                    我们致力于提供专业的 VPN 服务，用我们的技术和热情，为大家打造快速、安全、高效的 VPN 接入及解决方案，满足自由访问互联网、
+                    网络传输加密、保护隐私等多种需求。成熟的技术、专业的管理以及真诚的服务，让所有人都能享受开放的互联网。<br>
+                    让我们一起畅想全球互联网!!!
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4 class="col-md-2-font">常见问题</h4>
+                <div class="col-md-3-answer">
+                    <ul class="col-md-3-grey">
+                        <li class="col-md-3-grey-li">
+                            <a class="col-md-3-color" href="/">使用教程</a>
+                        </li>
+                        <li class="col-md-3-grey-li">
+                            <a class="col-md-3-color" href="/">技术原理</a>
+                        </li>
+                        <li class="col-md-3-grey-li">
+                            <a class="col-md-3-color" href="/">使用教程</a>
+                        </li>
+                        <li class="col-md-3-grey-li">
+                            <a class="col-md-3-color" href="/">技术原理</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4 class="col-md-2-font">联系我们</h4>
+                <div class="email">
+                    <a href="247933092@qq.com">247933092@qq.com</a>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    </div>
+<div class="sub-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                © 2017 苦瓜 VPN 版权所有
+                </div>
+            <div class="col-md-5" style="text-align: right">
+                <a class="col-md-5-font" href="/">服务条款</a>
+                <a class="col-md-5-font" href="/">隐私政策</a>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="clear:both;"></div>
+        </div>
+</div>
+
 
 <div id="fade" class="black_overlay"></div>
 

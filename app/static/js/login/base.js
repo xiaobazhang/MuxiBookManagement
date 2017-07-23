@@ -7,10 +7,12 @@ function fade() {
 }
 
 function showLogin() {
-    document.getElementById('light').style.display = 'block';
+    /*document.getElementById('light').style.display = 'block';*/
+    window.location.href = "/login"
 }
 function hideLogin() {
-    document.getElementById('light').style.display = 'none';
+    /*document.getElementById('light').style.display = 'none';*/
+    window.location.href = "/"
 }
 function showRegister() {
     document.getElementById('light').style.display = 'none';
