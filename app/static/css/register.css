@@ -1,26 +1,24 @@
 body {
-    /*background-image: url("../image/login/loginBac.jpg");;
-    background-size: 100%;
-    background-repeat: no-repeat;*/
     background-color: white;
 }
 
 .reg_base {
-    display: block;
-    width: 423px;
-    height: 444px;
-    padding: 13px;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin-left: -200px;
-    margin-top: -200px;
+    padding: 35px 0px 35px 0px;
+    height: 500px;
+    background-color: #dddddd;
+}
 
-    background-color: rgba(240, 255, 255, 0.6);
+.reg_container {
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
-    border-radius: 10px;
-    text-align: center;
-    z-index: 5555;
+.reg_form_container {
+    margin-left: 250px;
+    margin-right: 250px;
 }
 
 .reg_text {
@@ -37,42 +35,52 @@ body {
 .reg_label_input {
     font-size: 17px;
     font-family: 宋体;
-    width: 70px;
-    height: 28px;
-    line-height: 28px;
+    width: 100px;
+    height: 38px;
+    line-height: 35px;
     text-align: center;
     color: black;
 }
 
 .reg_text_field {
     font-size: 15px;
-    width: 230px;
-    height: 28px;
+    width: 300px;
+    height: 38px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 0;
+}
+
+.reg_yanzhengma_con {
+    margin-left: 130px;
+    margin-right: 130px;
 }
 
 .reg_text_yanzhengma {
     font-size: 15px;
-    width: 110px;
-    height: 28px;
+    width: 130px;
+    height: 38px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 0;
 }
 
+.reg_btn_con {
+    margin-left: 165px;
+    margin-right: 165px;
+}
+
+
 .reg_btn_login {
-    font-size: 14px;
+    font-size: 16px;
     font-family: 宋体;
-    position: absolute;
     top: 83%;
     left: 32%;
     width: 165px;
     height: 35px;
     line-height: 28px;
     text-align: center;
-    color: white;
+    color: black;
     background-color: #3BD9FF;
     /*background-color: rgba(240, 255, 255, 0.5);*/
     border-radius: 6px;

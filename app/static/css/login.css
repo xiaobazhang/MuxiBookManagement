@@ -3,21 +3,27 @@ body {
 }
 
 .login_frame {
-    display: block;
-    width: 460px;
-    height: 325px;
-    padding: 13px;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin-left: -200px;
-    margin-top: -200px;
+    padding: 35px 0px 35px 0px;
+    height: 400px;
+    background-color: #dddddd;
+}
 
-    background-color: rgba(240, 255, 255, 0.6);
+.login_container {
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
-    border-radius: 10px;
+.login_form_container {
+    margin-left: 250px;
+    margin-right: 250px;
+}
+
+.login_head_font {
     text-align: center;
-    z-index: 5555;
+    font-size: 30px;
 }
 
 /* basic style */
@@ -59,32 +65,31 @@ form p > * {
 }
 
 .label_input {
-    font-size: 14px;
+    font-size: 19px;
     font-family: 宋体;
 
-    width: 65px;
-    height: 28px;
-    line-height: 28px;
+    width: 100px;
+    height: 40px;
+    line-height: 38px;
     text-align: center;
 
-    color: white;
-    background-color: #3CD8FF;
+    color: black;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
 .text_field {
     font-size: 15px;
-    width: 278px;
-    height: 28px;
+    width: 350px;
+    height: 40px;
+
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 0;
 }
 
 .checkbox_style {
-    position: relative;
-    right: 58px;
+    right: 0px;
     top: 5px;
 }
 
@@ -102,44 +107,54 @@ form p > * {
     font-size: 15px;
     color: black;
     text-decoration: none;
-    position: relative;
-    right: 62px;
+    right: -20px;
     top: 5px;
 }
 
+.login_register_user {
+    height: 25px;
+    margin-top: 10px;
+    margin-left: 380px;
+    margin-right: 50px;
+}
 #register_user {
     font-size: 15px;
+    text-align: center;
     color: black;
-    text-decoration: none;
-    position: relative;
-    left: 90px;
-    top: 86px;
 }
 
 #forget_pwd:hover {
-    color: blue;
-    text-decoration: underline;
+    color: #00a0c6;
+}
+
+.login_btn_container {
+    height: 40px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.login_register_user:hover {
+    color: #00a0c6;
 }
 
 #btn_login {
-    font-size: 14px;
+    font-size: 16px;
     font-family: 宋体;
-    position: absolute;
-    top: 272px;
-    left: 160px;
-    width: 165px;
-    height: 35px;
+    width: 200px;
+    height: 38px;
     line-height: 28px;
     text-align: center;
-    color: white;
+    color: black;
     background-color: #3BD9FF;
     border-radius: 6px;
     border: 0;
     float: left;
 }
 
-
 #login_control {
+    height: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
     padding: 0 28px;
 }
 

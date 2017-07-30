@@ -1,29 +1,35 @@
-{% extends 'home.html' %}
+{% extends 'base.html' %}
 
 {% block css_file %}
 <link rel="stylesheet" type="text/css" href="/static/css/login.css"/>
 {% endblock %}
 
 
-{% block code %}
-
+{% block page_content %}
 <div id="light" class="login_frame">
-    <p id="image_logo"><img class="image_size" src="/static/image/login/fly.png"></p>
-    <form method="post">
-        {{ form.hidden_tag() }}
-        <a href="javascript:;" onclick="hideLogin()">
-            <div class="close" id="close"></div>
-        </a>
-        <p>{{form.username.label(class="label_input")}}{{form.username(class="text_field")}}</p>
-        <p>{{form.password.label(class="label_input")}}{{form.password(class="text_field")}}</p>
-        <div id="login_control">
-            <input type="checkbox" class="checkbox_style"/>
-            <a id="remember_me" name="remember_me" href="forget_pwd.html">记住密码</a>
-            <a id="forget_pwd" href="forget_pwd.html">忘记密码</a>
-            {{form.submit(id="btn_login")}}
-            <a id="register_user" href="javascript:;" onclick="showRegister()">注册用户</a>
+    <div class="login_container">
+        <p class="login_head_font">登录</p>
+        <div class="login_form_container">
+            <form method="post">
+                {{ form.hidden_tag() }}
+                <a href="javascript:;" onclick="hideLogin()">
+                </a>
+                <p>{{form.username.label(class="label_input")}}{{form.username(class="text_field")}}</p>
+                <p>{{form.password.label(class="label_input")}}{{form.password(class="text_field")}}</p>
+                <div id="login_control">
+                    <input type="checkbox" class="checkbox_style"/>
+                    <a id="remember_me" name="remember_me" href="forget_pwd.html">记住密码</a>
+                    <a id="forget_pwd" href="forget_pwd.html">忘记密码</a>
+                </div>
+                <div class="login_btn_container">
+                    {{form.submit(id="btn_login")}}
+                </div>
+                <div class="login_register_user">
+                    <a id="register_user" href="javascript:;" onclick="showRegister()">注册用户</a>
+                </div>
+            </form>
+            <div style="clear:both;"></div>
         </div>
-    </form>
+    </div>
 </div>
-
 {% endblock %}
