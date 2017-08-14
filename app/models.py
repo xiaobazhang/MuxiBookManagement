@@ -21,8 +21,9 @@
 
                  id                         Integer, primary_key                          主键
                  username                   String                                        用户名
+                 email                      String                                        邮箱名
                  password                   password_hash                                 密码散列值
-                 user_type                  Integer                                       账户类型,学生,老师,管理员
+                 user_type                  Integer                                       账户类型,学生0,老师1,管理员2
                  use_time                   Integer                                       使用时间
                  use_flow                   Integer                                       使用流量(单位是M)
                  online_type                Integer                                       在线状态
@@ -48,17 +49,20 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(164))
-    password_hash = db.Column(db.String(164))
+    email = db.Column(db.String(164))
+    password_hash = db.Column(db.String(128))
     user_type = db.Column(db.Integer)
     use_time = db.Column(db.Integer)
     use_flow = db.Column(db.Integer)
     online_type = db.Column(db.Boolean, default=False)
     confirmed = db.Column(db.Boolean, default=False)
 
+    # 产生令牌
     def generate_confirmation_token(self, expiration=3600):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
         return s.dumps({'confirm': self.id})
 
+    # 验证
     def confirm(self, token):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:

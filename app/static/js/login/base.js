@@ -23,3 +23,7 @@ function showRegister() {
 function hideRegister() {
     document.getElementById('register').style.display = 'none';
 }
+
+function flash() {
+    alert("你好，我是一个警告框！");
+}

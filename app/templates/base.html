@@ -43,14 +43,19 @@
         <ul class="menu">
             <li class="nav"><a href="/">首页</a></li>
             <li class="nav"><a href="/">产品</a></li>
-            {% if current_user.is_authenticated %}
-            <li class="nav"><a href="/user/{{ current_user.id }}">{{ current_user.username }}</a></li>
-            <li class="nav"><a href="/logout">退出</a></li>
-            {% else %}
-            <li class="nav"><a href="javascript:;" onclick="showLogin()">登录</a></li>
-            {% endif %}
             <li class="nav"><a href="/">下载</a></li>
         </ul>
+        <div class="container">
+            <ul class="denglu">
+                {% if current_user.is_authenticated %}
+                <li class="nav"><a href="/user/{{ current_user.id }}">{{ current_user.username }}</a></li>
+                <li class="nav"><a href="/logout">退出</a></li>
+                {% else %}
+                <li class="nav"><a href="javascript:;" onclick="showLogin()">登录</a></li>
+                {% endif %}
+            </ul>
+            <div style="clear:both;"></div>
+        </div>
     </div>
 </header>
 <!-- 滚动页 -->

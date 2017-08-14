@@ -77,7 +77,7 @@ a {
 
 .header .menu {
     height: 60px;
-    right: 5%;
+    right: 10%;
     position: absolute;
 }
 
@@ -107,6 +107,44 @@ a {
 .menu .nav a:hover {
     color: blueviolet;
 }
+
+.header .container {
+    height: 60px;
+    width: 120px;
+    right: 0%;
+    margin: 0px 0px 0px 0px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+
+.header .denglu {
+    height: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    position: absolute;
+}
+
+.denglu .nav {
+    display: inline-block;
+    text-align: center;
+    list-style: none;
+    margin: 5px 1px 5px 1px;
+    z-index: 1001;
+}
+
+.denglu .nav a {
+    display: inline-block;
+    color: black;
+    font-size: 16px;
+    line-height: 10px;
+    text-decoration: none;
+}
+
+.denglu .nav a:hover {
+    color: blueviolet;
+}
+
 
 #content {
     padding: 35px 0px;

@@ -38,11 +38,11 @@ def home():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print "name : %s" % (form.username)
+        print "name : %s" % (form.username.data)
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.verify_password(form.password.data):
-            login_user(user)
-            return redirect(url_for('user', id=current_user.id))
+            login_user(user, form.remember_me.data)
+            return redirect(url_for('user', id=current_user.id)) or url_for('home.html')
         flash('用户名或密码错误!')
     return render_template('login.html', form=form)
 
@@ -53,7 +53,7 @@ def login():
 def logout():
     """退出视图函数"""
     logout_user()
-    return redirect(url_for('/'))
+    return render_template('home.html')
 
 
 # 对登录用户可见
@@ -102,31 +102,50 @@ def user(id):
                            range_timedonebook_count=range_timedonebook_count,
                            session=session)
     """
+    u = User.query.filter_by(id=current_user.id).first()
     print "login"
-    render_template('forget_pwd.html')
+    return render_template('user.html', user=u)
 
 
 # 只对管理员可见
 @app.route('/register', methods=["POST", "GET"])
 def rter():
-    form = RterForm()
+    form = RterForm(request.form)
     image_code, str = create_validate_code()
-    buf = StringIO.StringIO()
     path = os.path.abspath('.')
     image_code.save(path + '/app/static/image/login/yanzhengma.jpg', 'JPEG')
     print str
+    print form.validate_on_submit()
     if form.validate_on_submit():
-        u = User(username=form.username.data, password=form.password.data, user_type=1, use_time=0, use_flow=0,
-                 online_type=False, confirmed=False)
-        db.session.add(u)
-        db.session.commit()
-        token = user.generate_confirmation_token()  ## 获取token
-        sendemail(user.email, 'Confirm Your Account', 'auth/email/confirm', user=user, token=token)
-
+        print "step1"
+        if is_register(form):
+            u = User(username=form.username.data, email=form.user_email.data, password=form.password.data, user_type=1,
+                     use_time=0, use_flow=0,
+                     online_type=False, confirmed=False)
+            print form.data
+            db.session.add(u)
+            db.session.commit()
+            # token = user.generate_confirmation_token()  ## 获取token
+            # print token
+            # sendemail(user.email, 'Confirm Your Account', 'auth/email/confirm', user=user, token=token)
+            return render_template('home.html')
+        else:
+            flash('邮箱或者用户名重复!')
+            return render_template('register.html', form=form)
     return render_template('register.html', form=form)
 
 
-
+def is_register(form):
+    user = User.query.filter_by(username=form.username.data).first()
+    email = User.query.filter_by(email=form.user_email.data).first()
+    print "step2"
+    print user
+    print email
+    if user is None and email is None:
+        print "register true"
+        return True
+    else:
+        return False
 
 
 

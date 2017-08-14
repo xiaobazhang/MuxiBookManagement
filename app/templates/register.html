@@ -12,6 +12,7 @@
         <p class="reg_text">注册用户</p>
         <div class="reg_form_container">
             <form method="post">
+                {{ form.hidden_tag() }}
                 <p class="reg_input">{{
                     form.username.label(class="reg_label_input")}}{{form.username(class="reg_text_field")}}</p>
                 <p class="reg_input">{{
@@ -25,7 +26,9 @@
                                                  src="/static/image/login/yanzhengma.jpg"></label>
                     {{ form.verification_code(class="reg_text_yanzhengma")}}
                 </p>
-                <p class="reg_btn_con">{{ form.submit(class="reg_btn_login") }}</p>
+                <div class="reg_btn_con">
+                    {{ form.submit(class="reg_btn_login") }}
+                </div>
             </form>
             <div style="clear:both;"></div>
         </div>
